@@ -3,17 +3,17 @@ require 'date'
 module Markio
   class Parser
 
+    # @return [Object]
+    #   Nokogiri::HTML data
     def initialize data
       @document = Nokogiri::HTML data
     end
     
     # Finds an object or list of objects in the db using a query
+    # 
     # @return [String, Array<String>, nil] the object or objects to
     #   find in the database. Can be nil.
-    #
-    # Reads from any I/O object.
-    # @param [#read] io the input object to read from
-    #
+    # 
     # @tagname This is
     #   indented tag data
     #
@@ -25,7 +25,12 @@ module Markio
     # * INSECURE       3
     # * SECURE         4  (success)
     #
-    # @param (see #traverse)
+    # @param (see #initialize)
+    # @author Loren Segal
+    # @deprecated Use {#my_new_method} instead of this method because
+    #   it uses a library that is no longer supported in Ruby 1.9.
+    #   The new method accepts the same parameters.
+    # @note This method may modify our application state!
     def parse
       bookmarks = []
       traverse(@document, []) do |bookmark|
