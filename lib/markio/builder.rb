@@ -1,7 +1,9 @@
 require 'nokogiri'
 
 class Markio::Builder
-
+ # Build NETSCAPE-Bookmark-file-1
+ #
+ # @return [String] NETSCAPE-Bookmark-file-1 with charset=UTF-8'
   attr_accessor :bookmarks
 
   def initialize(options = {})
@@ -9,10 +11,16 @@ class Markio::Builder
     @bookmarks = []
   end
 
+  # NETSCAPE-Bookmark as String
+  # @return [Object] build
+  # @see #build
   def build_string
     build
   end
 
+  # Write NETSCAPE-Bookmark to file
+  # @param [File, #write] File name 
+  # @return [Object] Result NETSCAPE-Bookmark file
   def build_file(file)
     File.new(file, 'w') do |f|
       f.write build
@@ -21,6 +29,9 @@ class Markio::Builder
 
   private
 
+  # General build NETSCAPE-Bookmark format
+  # use Nokogiri::HTML::Builder
+  # @return [String] NETSCAPE-Bookmark template
   def build
 
     bookmarks = { nil => [] }
@@ -68,6 +79,9 @@ END
 
   private
 
+  # Add NETSCAPE-Bookmark-file-1 entires
+  # @param [Array] :title, :href, :add_date, :last_visit, :last_modified, :folders, :icon_uri, :icon, :last_charset
+  # @return [Object] NETSCAPE-Bookmark entires
   def build_bookmark(html, b)
     html.dt {
       params = { :href => b.href }
