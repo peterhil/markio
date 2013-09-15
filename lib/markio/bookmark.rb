@@ -12,7 +12,7 @@ class Markio::Bookmark
   # @return [String] ADD_DATE, example `<DT><A ... ADD_DATE="1377884090"... `
   attr_accessor :add_date
   
-  # @return [String] !!!WRONG param last_visit, there are no last_visit in NETSCAPE-Bookmark
+  # @return [String] LAST_VISIT
   attr_accessor :last_visit
   
   # @return [String] LAST_MODIFIED, example `<DT><A ... LAST_MODIFIED="1377884090"... `
@@ -30,7 +30,7 @@ class Markio::Bookmark
   # @return [String] LAST_CHARSET, example '<DT><A ... LAST_CHARSET="UTF-8">...</A>'
   attr_accessor :last_charset
 
-  # @return [Bookmark]
+  # @return [Bookmark] ## Bookmark data
   def self.create data
     bookmark = new
     bookmark.title = data[:title]
