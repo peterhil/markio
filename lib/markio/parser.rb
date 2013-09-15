@@ -6,7 +6,26 @@ module Markio
     def initialize data
       @document = Nokogiri::HTML data
     end
-
+    
+    # Finds an object or list of objects in the db using a query
+    # @return [String, Array<String>, nil] the object or objects to
+    #   find in the database. Can be nil.
+    #
+    # Reads from any I/O object.
+    # @param [#read] io the input object to read from
+    #
+    # @tagname This is
+    #   indented tag data
+    #
+    # @meta_data_tag some data
+    # @!directive_tag some data
+    # * UNCHECKED      0
+    # * BOGUS          1
+    # * INDETERMINATE  2
+    # * INSECURE       3
+    # * SECURE         4  (success)
+    #
+    # @param (see #traverse)
     def parse
       bookmarks = []
       traverse(@document, []) do |bookmark|

@@ -3,34 +3,41 @@ class Markio::Bookmark
   # ## NETSCAPE-Bookmark format settings
   # @param [String] :title, :href, :add_date, :last_visit, :last_modified, :folders, :icon_uri, :icon, :last_charset
   
-  # @return [String] Bookmark title of item, example `The Ruby Reflector` in `<DT><A ...>The Ruby Reflector</A>`
+  # @!attribute [rw] title
+  # @return [String] title of item, example The Ruby Reflector in <DT><A ...>The Ruby Reflector</A>
   attr_accessor :title
   
-  # @return [String] Bookmark item url (HREF), example '<DT><A HREF="http://rubyreflector.com/ActionScript"....'
+  # @!attribute [rw] href
+  # @return [String] <DT><A HREF="http://rubyreflector.com/ActionScript"... >...</A>
   attr_accessor :href
   
-  # @return [String] ADD_DATE, example `<DT><A ... ADD_DATE="1377884090"... `
+  # @!attribute [rw] add_date
+  # @return [String] <DT><A ... ADD_DATE="1377884090"... >...</A>
   attr_accessor :add_date
   
+  # @!attribute [rw] last_visit
   # @return [String] LAST_VISIT
   attr_accessor :last_visit
   
-  # @return [String] LAST_MODIFIED, example `<DT><A ... LAST_MODIFIED="1377884090"... `
+  # @!attribute [rw] last_modified
+  # @return [String] <DT><A ... LAST_MODIFIED="1377884090"... >...</A>
   attr_accessor :last_modified
   
-  # @return [String] folders where bookmark consist, example Ruby is a folder `<DT><H3 ...>Ruby</H3>`
+  # @attribute [rw] folders
+  # @return [String] folders of bookmark items, example "Ruby" is a folder <DT><H3 ...>Ruby</H3>
   attr_accessor :folders
   
-  # @return [String] ICON_URI, example `<DT><A ... ICON_URI="http://reflectornetwork.com/favicon.ico"... >...</A>`
+  # @return [String] <DT><A ... ICON_URI="http://reflectornetwork.com/favicon.ico"... >...</A>
   attr_accessor :icon_uri
   
+  # @attribute [rw] icon
   # @return [String] ICON as raw data/base64, example '<DT><A ... ICON="data:image/png;base64,iVBO.....5CYII="... >...</A>'
   attr_accessor :icon
   
-  # @return [String] LAST_CHARSET, example '<DT><A ... LAST_CHARSET="UTF-8">...</A>'
+  # @return [String] <DT><A ... LAST_CHARSET="UTF-8">...</A>
   attr_accessor :last_charset
 
-  # @return [Bookmark] ## Bookmark data
+  # @return [Bookmark] Bookmark data
   def self.create data
     bookmark = new
     bookmark.title = data[:title]
