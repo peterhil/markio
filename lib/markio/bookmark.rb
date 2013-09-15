@@ -1,27 +1,27 @@
 require 'date'
 class Markio::Bookmark
-  # NETSCAPE-Bookmark format
+  # ## NETSCAPE-Bookmark format settings
   # @param [String] :title, :href, :add_date, :last_visit, :last_modified, :folders, :icon_uri, :icon, :last_charset
   
-  # @return [String] Bookmark title of item, example "The Ruby Reflector - ActionScript" in '<DT><A ...>The Ruby Reflector - ActionScript</A>'
+  # @return [String] Bookmark title of item, example `The Ruby Reflector` in `<DT><A ...>The Ruby Reflector</A>`
   attr_accessor :title
   
   # @return [String] Bookmark item url (HREF), example '<DT><A HREF="http://rubyreflector.com/ActionScript"....'
   attr_accessor :href
   
-  # @return [String] ADD_DATE, example '<DT><A ... ADD_DATE="1377884090"... '
+  # @return [String] ADD_DATE, example `<DT><A ... ADD_DATE="1377884090"... `
   attr_accessor :add_date
   
   # @return [String] !!!WRONG param last_visit, there are no last_visit in NETSCAPE-Bookmark
   attr_accessor :last_visit
   
-  # @return [String] LAST_MODIFIED, example '<DT><A ... LAST_MODIFIED="1377884090"... '
+  # @return [String] LAST_MODIFIED, example `<DT><A ... LAST_MODIFIED="1377884090"... `
   attr_accessor :last_modified
   
-  # @return [String] folders where bookmark consist, example Ruby is a folder '<DT><H3 ...>Ruby</H3>'
+  # @return [String] folders where bookmark consist, example Ruby is a folder `<DT><H3 ...>Ruby</H3>`
   attr_accessor :folders
   
-  # @return [String] ICON_URI, example '<DT><A ... ICON_URI="http://reflectornetwork.com/favicon.ico"... >...</A>'
+  # @return [String] ICON_URI, example `<DT><A ... ICON_URI="http://reflectornetwork.com/favicon.ico"... >...</A>`
   attr_accessor :icon_uri
   
   # @return [String] ICON as raw data/base64, example '<DT><A ... ICON="data:image/png;base64,iVBO.....5CYII="... >...</A>'

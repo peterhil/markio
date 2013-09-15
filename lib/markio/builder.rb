@@ -11,9 +11,7 @@ class Markio::Builder
     @bookmarks = []
   end
 
-  # NETSCAPE-Bookmark as String
-  # @return [Object] build
-  # @see #build
+  # @return (see #build)
   def build_string
     build
   end
