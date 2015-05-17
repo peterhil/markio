@@ -9,28 +9,10 @@ module Markio
       @document = Hpricot data
     end
     
-    # Finds an object or list of objects in the db using a query
+    # Parse bookmarks
     # 
-    # @return [String, Array<String>, nil] the object or objects to
-    #   find in the database. Can be nil.
-    # 
-    # @tagname This is
-    #   indented tag data
-    #
-    # @meta_data_tag some data
-    # @!directive_tag some data
-    # * UNCHECKED      0
-    # * BOGUS          1
-    # * INDETERMINATE  2
-    # * INSECURE       3
-    # * SECURE         4  (success)
-    #
-    # @param (see #initialize)
-    # @author Loren Segal
-    # @deprecated Use {#my_new_method} instead of this method because
-    #   it uses a library that is no longer supported in Ruby 1.9.
-    #   The new method accepts the same parameters.
-    # @note This method may modify our application state!
+    # @return [Markio::Bookmark]
+    #   List of Markio bookmarks
     def parse
       bookmarks = []
       traverse(@document, []) do |bookmark|
