@@ -1,4 +1,4 @@
-require 'nokogiri'
+require 'hpricot'
 require 'date'
 module Markio
   class Parser
@@ -6,7 +6,7 @@ module Markio
     # @return [Object]
     #   Nokogiri::HTML data
     def initialize data
-      @document = Nokogiri::HTML data
+      @document = Hpricot data
     end
     
     # Finds an object or list of objects in the db using a query
@@ -42,19 +42,18 @@ module Markio
     private
 
     def traverse node, folders, &block
-      node.xpath("./*").each do |child|
-        case child.name.downcase
+      return unless node.respond_to?('children') and node.children.to_a.any?
+      node.children.each do |child|
+        case child.pathname
           when 'dl'
             traverse child, folders, &block
             folders.pop
           when 'a'
             yield parse_bookmark(child, folders)
           when 'h3'
-            folders << child.text
+            folders << child.inner_text
           else
-            if child.children.any?
-              traverse child, folders, &block
-            end
+            traverse child, folders, &block
         end
       end
 
@@ -62,12 +61,12 @@ module Markio
 
     def parse_bookmark(node, folders)
       data = {}
-      node.attributes.each do |k, a|
-        data[k.downcase] = a.value
+      node.attributes.to_hash.each do |k, a|
+        data[k.downcase] = a
       end
       bookmark = Bookmark.new
       bookmark.href = data['href']
-      bookmark.title = node.text
+      bookmark.title = node.inner_text
       bookmark.folders = (Array.new(folders) + parse_tags(data['tags'])).uniq
       bookmark.add_date = parse_timestamp data['add_date']
       bookmark.last_visit = parse_timestamp data['last_visit']

@@ -18,6 +18,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_dependency 'nokogiri'
+  gem.add_dependency 'hpricot'
   gem.add_development_dependency 'rspec', '~> 2.11'
   gem.add_development_dependency 'pry-nav'
   gem.add_development_dependency 'guard-rspec'
