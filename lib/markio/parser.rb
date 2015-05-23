@@ -24,8 +24,7 @@ module Markio
     private
 
     def traverse node, folders, &block
-      return unless node.respond_to?('children') and node.children.to_a.any?
-      node.children.each do |child|
+      node.search('/*').each do |child|
         case child.pathname
           when 'dl'
             traverse child, folders, &block
@@ -33,12 +32,13 @@ module Markio
           when 'a'
             yield parse_bookmark(child, folders)
           when 'h3'
-            folders << child.inner_text
+            folders << child.inner_text.strip
           else
-            traverse child, folders, &block
+            if child.respond_to?('children') and child.children.to_a.any?
+              traverse child, folders, &block
+            end
         end
       end
-
     end
 
     def parse_bookmark(node, folders)
@@ -48,7 +48,7 @@ module Markio
       end
       bookmark = Bookmark.new
       bookmark.href = data['href']
-      bookmark.title = node.inner_text
+      bookmark.title = node.inner_text.strip
       bookmark.folders = (Array.new(folders) + parse_tags(data['tags'])).uniq
       bookmark.add_date = parse_timestamp data['add_date']
       bookmark.last_visit = parse_timestamp data['last_visit']
