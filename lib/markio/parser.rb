@@ -18,7 +18,7 @@ module Markio
       traverse(@document, []) do |bookmark|
         bookmarks << bookmark
       end
-      bookmarks
+      consolidate bookmarks
     end
 
     private
