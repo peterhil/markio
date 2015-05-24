@@ -50,7 +50,7 @@ module Markio
           when 'a'
             yield parse_bookmark(child, folders)
           when 'h3'
-            folders << child.text
+            folders << child.text.strip
           else
             if child.children.any?
               traverse child, folders, &block
@@ -67,7 +67,7 @@ module Markio
       end
       bookmark = Bookmark.new
       bookmark.href = data['href']
-      bookmark.title = node.text
+      bookmark.title = node.text.strip
       bookmark.folders = (Array.new(folders) + parse_tags(data['tags'])).uniq
       bookmark.add_date = parse_timestamp data['add_date']
       bookmark.last_visit = parse_timestamp data['last_visit']
